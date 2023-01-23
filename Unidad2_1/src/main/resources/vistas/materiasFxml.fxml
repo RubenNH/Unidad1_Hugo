@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.utez.unidad2_1.controllers.materiasController">
+   <children>
+      <AnchorPane layoutX="36.0" layoutY="311.0" prefHeight="69.0" prefWidth="580.0" style="-fx-border-style: solid; -fx-border-color: gray;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+            <Label layoutX="104.0" layoutY="24.0" text="Materia" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="Lucida Bright Italic" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtMateria" layoutX="12.0" layoutY="37.0" prefHeight="33.0" prefWidth="233.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="36.0" />
+            <Button fx:id="btnGuardarCambios" layoutX="260.0" layoutY="37.0" mnemonicParsing="false" onAction="#btnGuardarOnAction" prefHeight="31.0" prefWidth="118.0" text="Guardar" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="259.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="36.0">
+               <font>
+                  <Font name="Lucida Bright Italic" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnCancelar" disable="true" layoutX="412.0" layoutY="24.0" mnemonicParsing="false" onAction="#btnCancelarOnAction" prefHeight="31.0" prefWidth="118.0" text="Cancelar" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="412.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="35.0">
+               <font>
+                  <Font name="Lucida Bright Italic" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="100.0" layoutY="63.0" prefHeight="200.0" prefWidth="479.0" style="-fx-border-style: solid; -fx-border-color: gray;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <TableView fx:id="tablrMaterias" layoutX="77.0" layoutY="45.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
