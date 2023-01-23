@@ -11,8 +11,7 @@ import java.util.Scanner;
 
 public class alumnoDao {
     static Scanner leer = new Scanner(System.in);
-    static ObjectContainer dbBasica = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "base.db4o");
-
+    static ObjectContainer db = getConnection();
     public static ObjectSet<Alumno> consultaGen(){
         ObjectContainer db = getConnection();
         try{
@@ -102,9 +101,14 @@ public class alumnoDao {
             ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "base.db4o");
             return db;
         }catch (Exception a){
-            dbBasica.close();
-            ObjectContainer dbNueva = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "base.db4o");
-            return dbNueva;
+            if (db== null){
+                ObjectContainer dbNueva = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "base.db4o");
+                return dbNueva;
+            }else{
+                db.close();
+                ObjectContainer dbNueva = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "base.db4o");
+                return dbNueva;
+            }
         }
     }
 }
