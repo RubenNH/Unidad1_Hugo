@@ -1,6 +1,10 @@
 package edu.utez.unidad2_1.models;
 
+import edu.utez.unidad2_1.models.Materia;
+
+
 import java.io.Serializable;
+import java.util.List;
 
 public class Alumno implements Serializable {
 
@@ -17,15 +21,17 @@ public class Alumno implements Serializable {
     private String apellidos;
     private int edad;
 
+    private List<Materia> materias;
 
     public Alumno() {
     }
 
-    public Alumno(int id, String nombres, String apellidos, int edad) {
+    public Alumno(int id, String nombres, String apellidos, int edad, List<Materia> materias) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.edad = edad;
+        this.materias = materias;
     }
 
     public int getId() {
@@ -60,14 +66,22 @@ public class Alumno implements Serializable {
         this.edad = edad;
     }
 
-    @Override  //esto hace que en vez de que te devuelva espacio en memoria te devuelva lo que esta dentro del objeto
+    public List<Materia> getMaterias() {
+        return materias;
+    }
 
+    public void setMaterias(List<Materia> materias) {
+        this.materias = materias;
+    }
+
+    @Override  //esto hace que en vez de que te devuelva espacio en memoria te devuelva lo que esta dentro del objeto
     public String toString() {
         return "Alumno{" +
                 "id=" + id +
                 ", nombres='" + nombres + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", edad=" + edad +
+                ", materias=" + materias +
                 '}';
     }
 }
