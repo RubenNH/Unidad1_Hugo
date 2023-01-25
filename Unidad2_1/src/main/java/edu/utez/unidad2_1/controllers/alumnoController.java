@@ -49,6 +49,7 @@ public class alumnoController implements Initializable {
     private materiaDao tdMateria;
     private ContextMenu cmOpciones;
     private ContextMenu cmOpcionesMatOpc;
+    private ContextMenu cmOpcionesMatSele;
     private Alumno alumnoSeleccionado;
     private Materia materiaSeleccionada;
     private List<Materia> materiasSeleccionadas = new ArrayList();
@@ -60,15 +61,19 @@ public class alumnoController implements Initializable {
         this.td = new alumnoDao();
         cmOpciones = new ContextMenu();
         cmOpcionesMatOpc = new ContextMenu();
+        cmOpcionesMatSele = new ContextMenu();
         MenuItem miEditar = new MenuItem("editar");
         MenuItem miSeleccion = new MenuItem("Elegir materia");
         MenuItem miEliminar = new MenuItem("Eliminar");
+        MenuItem miQuitar = new MenuItem("Quitar Materia");
         cmOpciones.getItems().addAll(miEditar);
         cmOpciones.getItems().addAll(miEliminar);
         cmOpcionesMatOpc.getItems().addAll(miSeleccion);
+        cmOpcionesMatSele.getItems().addAll(miQuitar);
 
         tableAlumno.setContextMenu(cmOpciones);
         tableOpc.setContextMenu(cmOpcionesMatOpc);
+        tablSelec.setContextMenu(cmOpcionesMatSele);
         miEditar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -77,6 +82,7 @@ public class alumnoController implements Initializable {
                 txtNombre.setText(alumnoSeleccionado.getNombres());
                 txtApellidos.setText(alumnoSeleccionado.getApellidos());
                 txtEdad.setText(String.valueOf(alumnoSeleccionado.getEdad()));
+                cargarNuevasMaterias(alumnoSeleccionado.getMaterias());
 
                 btnCancelar.setDisable(false);
             }
@@ -129,6 +135,28 @@ public class alumnoController implements Initializable {
                 }
             }
         });
+
+        miQuitar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                materiasSeleccionadas = new ArrayList<>();
+                int index = tablSelec.getSelectionModel().getSelectedIndex();
+                materiasSeleccionadas = tablSelec.getItems();
+                materiasSeleccionadas.remove(tablSelec.getItems().get(index));
+
+                tablSelec.getColumns().clear();
+                tablSelec.getItems().clear();
+
+                ObservableList<Materia> datosMat = FXCollections.observableArrayList(materiasSeleccionadas);
+                TableColumn materiaCol = new TableColumn("Materias Elegidas");
+                materiaCol.setCellValueFactory(new PropertyValueFactory("nombre"));
+
+
+                tablSelec.setItems(datosMat);
+                tablSelec.getColumns().addAll(materiaCol);
+                btnCancelar.setDisable(false);
+            }
+        });
     }
     @FXML
     void btnGuardarOnAction(ActionEvent event) {
@@ -160,7 +188,7 @@ public class alumnoController implements Initializable {
             alumnoSeleccionado.setNombres(txtNombre.getText());
             alumnoSeleccionado.setApellidos(txtApellidos.getText());
             alumnoSeleccionado.setEdad(Integer.parseInt(txtEdad.getText()));
-            System.out.println(materiasSeleccionadas.get(0).getNombre()+ " aqui");
+
             alumnoSeleccionado.setMaterias(materiasSeleccionadas);
 
             boolean rsp = td.update(alumnoSeleccionado);
@@ -265,6 +293,8 @@ public class alumnoController implements Initializable {
     public void cargarNuevasMaterias(List<Materia> Materia){
         tablSelec.getColumns().clear();
         tablSelec.getItems().clear();
+        System.out.println(Materia.get(0).getNombre());
+
         ObservableList<Materia> datosMat = FXCollections.observableArrayList(Materia);
         TableColumn materiaCol = new TableColumn("Materias Elegidas");
         materiaCol.setCellValueFactory(new PropertyValueFactory("nombre"));
