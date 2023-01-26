@@ -21,8 +21,6 @@ public class alumnoDao {
                     return true;
                 }
             });
-            while (result.hasNext())
-                System.out.println(result.next());
             return result;
         }catch (Exception e){
             System.out.println(e);
@@ -57,6 +55,7 @@ public class alumnoDao {
                 temp.setNombres(alumno.getNombres());
                 temp.setApellidos(alumno.getApellidos());
                 temp.setEdad(alumno.getEdad());
+                temp.setMaterias(alumno.getMaterias());
                 db.store(temp);
                 db.commit();
                 return true;
