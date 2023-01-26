@@ -7,12 +7,12 @@ import com.db4o.query.Predicate;
 import edu.utez.unidad2_1.models.Alumno;
 import edu.utez.unidad2_1.models.Materia;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class alumnoDao {
     static Scanner leer = new Scanner(System.in);
-    static ObjectContainer dbBasica = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "base.db4o");
-
+    static ObjectContainer db = getConnection();
     public static ObjectSet<Alumno> consultaGen(){
         ObjectContainer db = getConnection();
         try{
@@ -33,7 +33,7 @@ public class alumnoDao {
         ObjectContainer db = getConnection();
         try {
             int i = getNewId(db);
-            Alumno temp = new Alumno(i, alumno.getNombres(), alumno.getApellidos(), alumno.getEdad());
+            Alumno temp = new Alumno(i, alumno.getNombres(), alumno.getApellidos(), alumno.getEdad(), alumno.getMaterias());
             db.store(temp);
             db.commit();
             System.out.println("very god");
@@ -49,12 +49,13 @@ public class alumnoDao {
     public boolean update(Alumno alumno){
         ObjectContainer db = getConnection();
         try {
-            ObjectSet resultado = db.queryByExample(new Alumno(alumno.getId(),null, null,0));
+            ObjectSet resultado = db.queryByExample(new Alumno(alumno.getId(),null, null,0,new ArrayList<>()));
             if (resultado.hasNext()) {//If porq solo es
                 Alumno temp = (Alumno) resultado.next();//
                 temp.setNombres(alumno.getNombres());
                 temp.setApellidos(alumno.getApellidos());
                 temp.setEdad(alumno.getEdad());
+                temp.setMaterias(alumno.getMaterias());
                 db.store(temp);
                 db.commit();
                 return true;
@@ -71,7 +72,7 @@ public class alumnoDao {
     public boolean delete(Alumno alumno){
         ObjectContainer db = getConnection();
         try{
-            ObjectSet result = db.queryByExample(new Alumno(alumno.getId(), alumno.getNombres(), alumno.getApellidos(), alumno.getEdad()));
+            ObjectSet result = db.queryByExample(new Alumno(alumno.getId(), alumno.getNombres(), alumno.getApellidos(), alumno.getEdad(), alumno.getMaterias()));
             Alumno found = (Alumno) result.next();
             System.out.println(found);
             db.delete(found);
@@ -102,9 +103,14 @@ public class alumnoDao {
             ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "base.db4o");
             return db;
         }catch (Exception a){
-            dbBasica.close();
-            ObjectContainer dbNueva = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "base.db4o");
-            return dbNueva;
+            if (db== null){
+                ObjectContainer dbNueva = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "base.db4o");
+                return dbNueva;
+            }else{
+                db.close();
+                ObjectContainer dbNueva = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "base.db4o");
+                return dbNueva;
+            }
         }
     }
 }

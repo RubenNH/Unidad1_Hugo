@@ -9,16 +9,27 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class materiasController implements Initializable {
+    @FXML
+    private Button btnGoToAlumnos;
     @FXML
     private Button btnGuardarCambios;
     @FXML
@@ -171,5 +182,21 @@ public class materiasController implements Initializable {
         tablrMaterias.getColumns().addAll(materiaCol);
 
 
+    }
+
+    @FXML
+    void btnGoYoAlumnosOnAction(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        //Cargas el FXML que queres que abra en un Parent
+        URI uri = Paths.get("src/main/resources/vistas/alumnoFxml.fxml").toAbsolutePath().toUri();
+        System.out.println(uri);
+        Parent root = FXMLLoader.load(uri.toURL());
+        Scene scene = new Scene(root);;
+        stage.setScene(scene);
+        stage.show();
+
+        //Cerramos la ventana anterior de Login. La obtenemos a partir de un control (Button)
+        Stage old = (Stage) btnGoToAlumnos.getScene().getWindow();
+        old.close();
     }
 }

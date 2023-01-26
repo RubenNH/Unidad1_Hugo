@@ -16,13 +16,18 @@
                   <Font name="Lucida Bright Italic" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="txtMateria" layoutX="12.0" layoutY="37.0" prefHeight="33.0" prefWidth="233.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="36.0" />
-            <Button fx:id="btnGuardarCambios" layoutX="260.0" layoutY="37.0" mnemonicParsing="false" onAction="#btnGuardarOnAction" prefHeight="31.0" prefWidth="118.0" text="Guardar" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="259.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="36.0">
+            <TextField fx:id="txtMateria" layoutX="13.0" layoutY="38.0" prefHeight="30.0" prefWidth="165.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="404.0" AnchorPane.topAnchor="37.0" />
+            <Button fx:id="btnGuardarCambios" layoutX="192.0" layoutY="38.0" mnemonicParsing="false" onAction="#btnGuardarOnAction" prefHeight="31.0" prefWidth="100.0" text="Guardar" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="37.0">
                <font>
                   <Font name="Lucida Bright Italic" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnCancelar" disable="true" layoutX="412.0" layoutY="24.0" mnemonicParsing="false" onAction="#btnCancelarOnAction" prefHeight="31.0" prefWidth="118.0" text="Cancelar" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="412.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="35.0">
+            <Button fx:id="btnCancelar" disable="true" layoutX="302.0" layoutY="38.0" mnemonicParsing="false" onAction="#btnCancelarOnAction" prefHeight="32.0" prefWidth="96.0" text="Cancelar" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="295.0" AnchorPane.rightAnchor="184.0" AnchorPane.topAnchor="37.0">
+               <font>
+                  <Font name="Lucida Bright Italic" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnGoToAlumnos" layoutX="382.0" layoutY="41.0" mnemonicParsing="false" onAction="#btnGoYoAlumnosOnAction" prefHeight="33.0" prefWidth="188.0" text="Ir a Alumnos" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="420.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="37.0">
                <font>
                   <Font name="Lucida Bright Italic" size="15.0" />
                </font>
