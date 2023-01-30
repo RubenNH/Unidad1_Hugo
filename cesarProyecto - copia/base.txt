@@ -1,0 +1,34 @@
+drop database if exists paises;
+create database paises;
+use paises;
+
+create table paises(
+idPais bigint primary key not null auto_increment,
+pais varchar (30) not null
+);
+
+create table estados(
+idEstados bigint primary key not null auto_increment,
+estados varchar(30) not null,
+fkPaises bigint not null,
+foreign key(fkPaises) REFERENCES paises(idPais)
+);
+
+create table municipios(
+idMunicipios bigint primary key not null auto_increment,
+municipios varchar(30) not null,
+fkEstados bigint not null,
+foreign key(fkEstados) REFERENCES estados(idEstados)
+);
+
+insert into paises values(1,'Mexico');
+insert into paises values(2,'Estados Unidos');
+insert into paises values(3,'Canada');
+
+insert into estados values(1,'Morelos',1);
+insert into estados values(2,'New York',2);
+insert into estados values(3,'Toronto',3);
+
+insert into municipios values(1,'Cuernavaca',1);
+insert into municipios values(2,'Broklin',2);
+insert into municipios values(3,'Tabasco xd',3);
